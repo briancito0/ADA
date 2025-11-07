@@ -1,0 +1,47 @@
+{% extends 'base.html' %} 
+
+{% block title %}Detalle de {{ animal.nombre }}{% endblock %}
+
+{% block content %}
+    <h2 style="color: #007bff;"> Detalles de {{ animal.nombre }} </h2>
+    
+    <div style="display: flex; gap: 20px; border: 1px solid #ccc; padding: 20px; border-radius: 8px;">
+        
+        <div style="flex: 1;">
+            {% if animal.foto %}
+                <img src="{{ animal.foto.url }}" alt="Foto de {{ animal.nombre }}" 
+                     style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 4px;">
+            {% else %}
+                <p>⚠️ No hay foto disponible.</p>
+            {% endif %}
+        </div>
+
+        <div style="flex: 2;">
+            <h3>Datos Principales</h3>
+            <ul>
+                <li>Especie: **{{ animal.especie }}**</li>
+                <li>Raza: **{{ animal.raza }}**</li>
+                <li>Edad: **{{ animal.edad }}** años</li>
+                <li>Sexo: **{{ animal.sexo }}**</li>
+            </ul>
+
+            <h3>Descripción</h3>
+            <p>{{ animal.descripcion }}</p>
+
+            {% if user.is_authenticated %}
+                <hr>
+                <h4>Acciones de Gestión</h4>
+                <a href="{% url 'animales:editar' pk=animal.pk %}" 
+                   style="padding: 8px 15px; background-color: #ffc107; color: #333; text-decoration: none; border-radius: 4px; margin-right: 10px;">
+                    ✏️ Editar Datos
+                </a>
+                <a href="{% url 'animales:eliminar' pk=animal.pk %}" 
+                   style="padding: 8px 15px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 4px;">
+                    🗑️ Eliminar Animal
+                </a>
+            {% endif %}
+
+            <p style="margin-top: 20px;"><a href="{% url 'animales:lista' %}">↩️ Volver al Listado</a></p>
+        </div>
+    </div>
+{% endblock %}

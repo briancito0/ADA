@@ -1,0 +1,20 @@
+# DEPENDENCIAS
+/node_modules
+/servidor/node_modules
+/servidor_python/venv
+
+# Python
+__pycache__/
+*.pyc
+*.log
+
+# Angular / Compilados
+/dist
+/tmp
+
+# Archivos de Sistema Operativo
+.DS_Store
+Thumbs.db
+
+# Archivos SQL (opcional, si no quieres el historial)
+*.sql

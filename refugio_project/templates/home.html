@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+
+{% block title %}Bienvenidos al Refugio de Adopción{% endblock %}
+
+{% block content %}
+    <div style="text-align: center; padding: 40px; background-color: #e0f7fa; border-radius: 8px;">
+        <h2>¡Tu Nuevo Mejor Amigo te Está Esperando!</h2>
+        <p>En nuestro refugio, cada animal tiene una historia y está listo para comenzar un nuevo capítulo en tu hogar.</p>
+        
+        <a href="{% url 'animales:lista' %}" 
+           style="display: inline-block; margin-top: 20px; padding: 15px 30px; background-color: #ff5722; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1.1em;">
+            Ver Animales Disponibles Ahora
+        </a>
+    </div>
+
+    <div style="margin-top: 40px; border-top: 1px solid #ccc; padding-top: 20px;">
+        <h3>¿Por qué Adoptar?</h3>
+        <p>Adoptar salva dos vidas: la del animal que llevas a casa y la del animal que podemos rescatar gracias al espacio que liberas.</p>
+        
+        {% if not user.is_authenticated %}
+            <p>Si eres nuevo, puedes <a href="{% url 'usuarios:registro' %}">registrarte aquí</a> para empezar el proceso de adopción.</p>
+        {% endif %}
+    </div>
+{% endblock %}

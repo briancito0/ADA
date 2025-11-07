@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if object %}Editar Animal: {{ object.nombre }}{% else %}Registrar Nuevo Animal{% endif %}
+{% endblock %}
+
+{% block content %}
+    <h2 style="color: #007bff;">
+        {% if object %}✏️ Editar a {{ object.nombre }}{% else %}➕ Registrar Nuevo Animal{% endif %}
+    </h2>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {{ form.as_p }} 
+        
+        <button type="submit" style="padding: 10px; background-color: #ffc107; color: #333; border: none; cursor: pointer; border-radius: 4px;">
+            {% if object %}Guardar Cambios{% else %}Registrar Animal{% endif %}
+        </button>
+        
+        <a href="{% url 'animales:lista' %}" style="margin-left: 15px; text-decoration: none; color: #dc3545;">Cancelar</a>
+    </form>
+{% endblock %}
