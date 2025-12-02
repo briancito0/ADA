@@ -3,7 +3,7 @@
 {% block title %}Animales en Adopción{% endblock %}
 
 {% block content %}
-    <h2>🐶 Catálogo de Animales en Adopción 🐱</h2>
+    <h2>Catálogo de Animales en Adopción</h2>
     
     {% if user.is_authenticated %}
         <p>
@@ -23,12 +23,12 @@
                     {% endif %}
                     
                     <p>{{ animal.descripcion|truncatechars:100 }}</p>
-                    <a href="{% url 'animales:detalle' pk=animal.pk %}">Ver Detalles y Adoptar »</a>
+                    <a href="{% url 'animales:detalle' pk=animal.pk %}">Ver información de los animales »</a>
                 </div>
             {% endfor %}
         </div>
     {% else %}
-        <p>¡Vaya! Parece que no tenemos ningún animal disponible para adopción en este momento. Vuelve pronto.</p>
+        <p>Ningún animal disponible para adopción.</p>
     {% endif %}
 
 {% endblock %}

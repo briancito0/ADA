@@ -1,5 +1,3 @@
-
-
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings 
@@ -14,9 +12,7 @@ urlpatterns = [
     path('usuarios/', include('usuarios.urls', namespace='usuarios')),
     path('animales/', include('animales.urls')),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
-    path('login/', LoginView.as_view(template_name='registration/login.html'), name='login'),
-    
-    
+    path('login/', LoginView.as_view(template_name='registration/login.html'), name='login'),   
 ]
 
 if settings.DEBUG:
