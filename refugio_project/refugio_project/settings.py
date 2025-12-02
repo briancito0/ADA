@@ -57,7 +57,7 @@ ROOT_URLCONF = 'refugio_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Ahora 'os' es reconocido
+        'DIRS': [os.path.join(BASE_DIR, 'templates')], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,7 +130,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Crea la carpeta 'media' en la raíz del proyecto
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
 
 
 
