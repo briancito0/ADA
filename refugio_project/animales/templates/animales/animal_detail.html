@@ -3,20 +3,20 @@
 {% block title %}Detalle de {{ animal.nombre }}{% endblock %}
 
 {% block content %}
-    <h2 style="color: #007bff;"> Detalles de {{ animal.nombre }} </h2>
+    <h2 class="text-primary mb-4"> Detalles de {{ animal.nombre }} </h2>
     
-    <div style="display: flex; gap: 20px; border: 1px solid #ccc; padding: 20px; border-radius: 8px;">
+    <div class="row border p-4 rounded shadow-sm">
         
-        <div style="flex: 1;">
+        <div class="col-md-5 mb-3 mb-md-0">
             {% if animal.foto %}
                 <img src="{{ animal.foto.url }}" alt="Foto de {{ animal.nombre }}" 
-                     style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 4px;">
+                    class="img-fluid rounded" style="max-height: 400px; object-fit: cover;">
             {% else %}
-                <p>⚠️ No hay foto disponible.</p>
+                <p class>No hay foto disponible.</p>
             {% endif %}
         </div>
 
-        <div style="flex: 2;">
+        <div class="col-md-7">
             <h3>Datos Principales</h3>
             <ul>
                 <li>Especie: {{ animal.especie }}</li>
@@ -28,20 +28,47 @@
             <h3>Descripción</h3>
             <p>{{ animal.descripcion }}</p>
 
-            {% if user.is_authenticated %}
-                <hr>
-                <h4>Acciones de Gestión</h4>
-                <a href="{% url 'animales:editar' pk=animal.pk %}" 
-                   style="padding: 8px 15px; background-color: #ffc107; color: #333; text-decoration: none; border-radius: 4px; margin-right: 10px;">
-                    ✏️ Editar Datos
-                </a>
-                <a href="{% url 'animales:eliminar' pk=animal.pk %}" 
-                   style="padding: 8px 15px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 4px;">
-                    🗑️ Eliminar Animal
-                </a>
+            {% if animal.subido_por %}
+                <p>
+                    <small class="text-muted">
+                        Publicado por: <strong>{{ animal.subido_por.username }}</strong>
+                    </small>
+                </p>
             {% endif %}
 
-            <p style="margin-top: 20px;"><a href="{% url 'animales:lista' %}">↩️ Volver al Listado</a></p>
+            <hr>
+            
+            <h4>Acciones de Gestión</h4>
+            
+            {% if user.is_authenticated %}
+                
+                <div class="d-flex flex-wrap mb-3"> 
+                    
+                    <a href="{% url 'animales:adoptar' pk=animal.pk %}" 
+                       class="btn btn-success btn-sm me-2">
+                       <i class></i>Adoptar este Animal
+                    </a>
+
+                    <a href="{% url 'animales:editar' pk=animal.pk %}" 
+                       class="btn btn-warning btn-sm me-2">
+                        Editar Datos
+                    </a>
+                    
+                    <a href="{% url 'animales:eliminar' pk=animal.pk %}" 
+                       class="btn btn-danger btn-sm">
+                        Eliminar Animal
+                    </a>
+
+                </div>
+                {% else %}
+                <p class="alert alert-info">Inicia sesión para ver las opciones de gestión y adopción.</p>
+            {% endif %}
+
+            <div class="mt-3">
+                <a href="{% url 'animales:lista' %}" class="btn btn-secondary btn-sm">
+                    Volver al Listado
+                </a>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -7,7 +7,7 @@
     
     {% if user.is_authenticated %}
         <p>
-            <a href="{% url 'animales:crear' %}" style="padding: 5px 10px; background-color: green; color: white; border-radius: 5px; text-decoration: none;">+ Agregar Nuevo Animal</a>
+            <a href="{% url 'animales:registrar' %}" style="padding: 5px 10px; background-color: green; color: white; border-radius: 5px; text-decoration: none;">Agregar Nuevo Animal</a>
         </p>
     {% endif %}
 
@@ -15,7 +15,7 @@
         <div class="animal-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
             {% for animal in animales %}
                 <div class="animal-card" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">
-                    <h3>{{ animal.nombre }} ({{ animal.especie }})</h3>
+                    <h3>{{ animal.nombre }}</h3>
                     <p>Raza: {{ animal.raza }}</p>
                     
                     {% if animal.foto %}

@@ -6,7 +6,7 @@
 
 {% block content %}
     <h2 style="color: #007bff;">
-        {% if object %}✏️ Editar a {{ object.nombre }}{% else %}➕ Registrar Nuevo Animal{% endif %}
+        {% if object %}Editar a {{ object.nombre }}{% else %}Registrar Nuevo Animal{% endif %}
     </h2>
     
     <form method="post" enctype="multipart/form-data">
