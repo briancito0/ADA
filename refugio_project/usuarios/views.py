@@ -26,4 +26,4 @@ class RegistroUsuario(SuccessMessageMixin, CreateView):
     
     success_url = reverse_lazy('login') 
     
-    success_message = "¡Tu cuenta ha sido creada exitosamente! Ya puedes iniciar sesión."
+    success_message = "¡Tu registro fué exitoso! Ya podes iniciar sesión."

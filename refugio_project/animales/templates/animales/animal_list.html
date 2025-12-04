@@ -23,7 +23,7 @@
                     {% endif %}
                     
                     <p>{{ animal.descripcion|truncatechars:100 }}</p>
-                    <a href="{% url 'animales:detalle' pk=animal.pk %}">Ver información de los animales »</a>
+                    <a href="{% url 'animales:detalle' pk=animal.pk %}">Ver información de los animales</a>
                 </div>
             {% endfor %}
         </div>
