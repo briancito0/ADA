@@ -7,18 +7,18 @@
         <h2>¡Tu Nuevo Mejor Amigo te Está Esperando!</h2>
         <p>En nuestro refugio, cada animal tiene una historia y está listo para comenzar un nuevo capítulo en tu hogar.</p>
         
-        <a href="{% url 'animales:lista' %}" 
-           style="display: inline-block; margin-top: 20px; padding: 15px 30px; background-color: #ff5722; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1.1em;">
+        <a href="{% url 'animales:lista_animales' %}" 
+            style="display: inline-block; margin-top: 20px; padding: 15px 30px; background-color: #ff5722; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1.1em;">
             Ver Animales Disponibles Ahora
         </a>
     </div>
 
     <div style="margin-top: 40px; border-top: 1px solid #ccc; padding-top: 20px;">
         <h3>¿Por qué Adoptar?</h3>
-        <p>Adoptar salva dos vidas: la del animal que llevas a casa y la del animal que podemos rescatar gracias al espacio que liberás.</p>
+        <p>Adoptar animales es una decisión maravillosa porque salvas una vida (o dos, liberando espacio en refugios), combates la cría irresponsable, y obtienes beneficios para tu salud física y mental, como reducción del estrés y fomento de la actividad, además de amor incondicional y compañía para tu familia, enseñando responsabilidad y empatía. Es darle una segunda oportunidad a un ser sintiente que lo necesita y recibir a cambio una lealtad y afecto incomparables</p>
         
         {% if not user.is_authenticated %}
-            <p>Si sos nuevo, puedes <a href="{% url 'usuarios:registro' %}">registrarte</a> para empezar el proceso de adopción.</p>
+            <p>Si sos nuevo, podes <a href="{% url 'usuarios:registro' %}">registrarte</a> para empezar el proceso de adopción.</p>
         {% endif %}
     </div>
 {% endblock %}

@@ -1,18 +1,61 @@
-{% extends 'base.html' %}
-{% block title %}Mi Perfil{% endblock %}
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block title %}Modificar Perfil{% endblock %}
 
 {% block content %}
-    <h2>Mi Perfil</h2>
-    
-    <form method="post">
-        {% csrf_token %}
-        
-        {{ form.as_p }} 
-        
-        <button type="submit" style="padding: 10px; background-color: #28a745; color: white; border: none; cursor: pointer;">
-            Guardar Cambios
-        </button>
-    </form>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0">Modificar mi Perfil</h3>
+                    </div>
+                    <div class="card-body">
+                        
+                        {# Mostrar mensajes de éxito o error #}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
 
-    <p style="margin-top: 15px;"><a href="{% url 'animales:lista' %}">Volver al Catálogo</a></p>
+                        <form method="post">
+                            {% csrf_token %}
+
+                            {# 1. DATOS DE LA CUENTA (User Model) #}
+                            
+                            <fieldset class="form-group border p-3 mb-4">
+                                <legend class="w-auto px-2">Datos de Acceso</legend>
+                                <p class="text-muted">Cambia tu nombre de usuario y correo electrónico.</p>
+                                
+                                {# user_form maneja username y email #}
+                                {{ user_form.as_p }} 
+                                
+                                {# Aquí puedes añadir un enlace para cambiar la contraseña si lo tienes configurado #}
+                            </fieldset>
+
+                            
+                            {# 2. DATOS DEL PERFIL (Perfil Model) #}
+                            
+                            <fieldset class="form-group border p-3 mb-4">
+                                <legend class="w-auto px-2">Información Personal</legend>
+                                
+                                {# perfil_form maneja nombre_completo y numero_telefono #}
+                                {{ perfil_form.as_p }} 
+                            </fieldset>
+
+                            <button type="submit" class="btn btn-warning btn-lg">
+                                Guardar Cambios
+                            </button>
+                            
+                            <a href="{% url 'home' %}" class="btn btn-secondary ml-3">Cancelar</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

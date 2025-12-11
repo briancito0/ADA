@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+
+{% block title %}Mis Solicitudes de Adopción{% endblock %}
+
+{% block content %}
+    <h2>Estado de Mis Solicitudes de Adopción</h2>
+    <p>Revisa el estado de las solicitudes que has enviado para adoptar animales.</p>
+
+    {% comment %} 
+        CORRECCIÓN 1: Cambiar 'solicitudes_hechas' por 'solicitudes'
+    {% endcomment %}
+    {% if solicitudes %} 
+        <div class="list-group">
+            {% for solicitud in solicitudes %}
+            
+                {% comment %} 
+                    CORRECCIÓN 2: Cambiar 'Aceptada' por 'APROBADA' y 'Pendiente' por 'PENDIENTE'
+                {% endcomment %}
+
+                {% if solicitud.estado == 'APROBADA' %} 
+                    {% with estado_clase='success' estado_texto='¡Aceptada! El dueño te contactará pronto.' %}
+                    {% include 'animales/_solicitud_card.html' with solicitud=solicitud estado_clase=estado_clase estado_texto=estado_texto %}
+                    {% endwith %}
+
+                {% elif solicitud.estado == 'PENDIENTE' %} 
+                    {% with estado_clase='warning' estado_texto='Pendiente de Revisión' %}
+                    {% include 'animales/_solicitud_card.html' with solicitud=solicitud estado_clase=estado_clase estado_texto=estado_texto %}
+                    {% endwith %}
+                
+                {% else %}
+                    {% with estado_clase='danger' estado_texto='Rechazada / Cancelada' %}
+                    {% include 'animales/_solicitud_card.html' with solicitud=solicitud estado_clase=estado_clase estado_texto=estado_texto %}
+                    {% endwith %}
+
+                {% endif %}
+            
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Aún no has enviado ninguna solicitud de adopción. Ver animales disponibles
+            <a href="{% url 'animales:lista_animales' %}" class="alert-link">Ver Catálogo</a>
+        </div>
+    {% endif %}
+
+{% endblock %}

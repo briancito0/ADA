@@ -1,17 +1,114 @@
-{% extends 'base.html' %}
-{% block title %}Registrarse{% endblock %}
+{% extends 'base.html' %} 
+{% load static %}
 
-{% block content %}
-    <h2>Crear cuenta</h2>
+{% block title %}Registro de Usuario{% endblock %}
+{% block content %} 
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-success text-white text-center">
+                        <h3 class="mb-0">Crear Cuenta para Adopción</h3>
+                    </div>
+                    <div class="card-body">
+                        
+                        {# Mostrar mensajes de Django (éxito, error) #}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} text-center" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
 
-    <form method="post">
-        {% csrf_token %}
-        
-        {{ form.as_p }} 
-        
-        <button type="submit" ... >
-            Registrarme
-        </button>
-    </form>
-    
-    {% endblock %}
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+
+                            
+                            {# MUESTRA ERRORES NO RELACIONADOS CON UN CAMPO ESPECÍFICO #}
+                            
+                            {% if form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Error de Formulario:</strong>
+                                    {% for error in form.non_field_errors %}
+                                        <p class="mb-0">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            
+                            <p class="text-muted text-center mb-4">Completa los siguientes datos para registrarte y empezar el proceso de adopción.</p>
+
+                            {# 1. DATOS DE LA CUENTA (User: username, email) #}
+                            <fieldset class="form-group border p-3 mb-4">
+                                <legend class="w-auto px-2 h5">Datos de Acceso</legend>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="{{ form.username.id_for_label }}" class="form-label">{{ form.username.label }}</label>
+                                        {{ form.username }}
+                                        {% if form.username.errors %}<div class="text-danger small">{{ form.username.errors }}</div>{% endif %}
+                                        <div class="form-text text-muted small">{{ form.username.help_text|safe }}</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label }}</label>
+                                        {{ form.email }}
+                                        {% if form.email.errors %}<div class="text-danger small">{{ form.email.errors }}</div>{% endif %}
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            {# 2. INFORMACIÓN PERSONAL (Perfil: nombre_completo, numero_telefono) #}
+                            <fieldset class="form-group border p-3 mb-4">
+                                <legend class="w-auto px-2 h5">Información de Contacto</legend>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="{{ form.nombre_completo.id_for_label }}" class="form-label">{{ form.nombre_completo.label }}</label>
+                                        {{ form.nombre_completo }}
+                                        {% if form.nombre_completo.errors %}<div class="text-danger small">{{ form.nombre_completo.errors }}</div>{% endif %}
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="{{ form.numero_telefono.id_for_label }}" class="form-label">{{ form.numero_telefono.label }}</label>
+                                        {{ form.numero_telefono }}
+                                        {% if form.numero_telefono.errors %}<div class="text-danger small">{{ form.numero_telefono.errors }}</div>{% endif %}
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            {# 3. CONTRASEÑAS #}
+                            <fieldset class="form-group border p-3 mb-4">
+                                <legend class="w-auto px-2 h5">Contraseña</legend>
+
+                                <div class="mb-3">
+                                    {# USAMOS form.password1 #}
+                                    <label for="{{ form.password1.id_for_label }}" class="form-label">Contraseña</label>
+                                    {{ form.password1 }}
+                                    {% if form.password1.errors %}<div class="text-danger small">{{ form.password1.errors }}</div>{% endif %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    {# USAMOS form.password2 PARA LA CONFIRMACIÓN #}
+                                    <label for="{{ form.password2.id_for_label }}" class="form-label">Confirmación de Contraseña</label>
+                                    {{ form.password2 }}
+                                    {% if form.password2.errors %}<div class="text-danger small">{{ form.password2.errors }}</div>{% endif %}
+                                    
+                                    {# Muestra las reglas de contraseña. #}
+                                    <div class="form-text text-muted small mt-2">
+                                        {{ form.password1.help_text|linebreaksbr }}
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <button type="submit" class="btn btn-success btn-lg btn-block mt-4">
+                                Registrarme
+                            </button>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center text-muted">
+                        ¿Ya tienes cuenta? <a href="{% url 'usuarios:login' %}">Inicia Sesión aquí</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

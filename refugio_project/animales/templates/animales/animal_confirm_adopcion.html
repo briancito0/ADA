@@ -13,17 +13,17 @@
             <strong>{{ animal.nombre }}</strong>.
         </p>
         <p>
-            Al confirmar esta acción, el registro de {{ animal.nombre }} será eliminado de animales disponibles en tránsito.
+            Al confirmar esta acción, se enviará una solicitud de adopción. Tu solicitud será revisada por el refugio.
         </p>
         
-        <form method="post">
+        <form method="post" action="{% url 'animales:enviar_solicitud' pk=animal.pk %}">
             {% csrf_token %}
             
             <button type="submit" class="btn btn-danger btn-lg mt-3">
-                <i class="fas fa-heart"></i> Confirmar adopción
+                <i class="fas fa-paw"></i> Confirmar Solicitud
             </button>
             
-            <a href="{% url 'animales:detalle' animal.pk %}" class="btn btn-secondary ml-3 mt-3">
+            <a href="{% url 'animales:detalle_animal' pk=animal.pk %}" class="btn btn-secondary ml-3 mt-3">
                 Cancelar
             </a>
         </form>

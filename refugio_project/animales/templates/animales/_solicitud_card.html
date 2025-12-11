@@ -1,0 +1,40 @@
+{% comment %}
+   # Esta plantilla parcial (card) se usa para mostrar el resumen de UNA solicitud de adopción.
+    Es llamada desde 'mis_solicitudes.html' y requiere las siguientes variables en el contexto:
+    - solicitud: El objeto SolicitudAdopcion.
+    - estado_clase: Clase de Bootstrap para el color (ej: 'warning', 'success', 'danger').
+    - estado_texto: Texto descriptivo del estado (ej: 'Pendiente', '¡Aprobada!', 'Rechazada').
+{% endcomment %}
+
+<div class="card mb-3 shadow-sm border-{{ estado_clase }}">
+    
+    <div class="card-header bg-{{ estado_clase }} text-white">
+        <h4 class="mb-0">Solicitud para: {{ solicitud.animal.nombre }}</h4>
+    </div>
+    
+    <div class="card-body">
+        
+        <p><strong>Estado Actual:</strong> 
+            <span class="badge bg-{{ estado_clase }}">{{ estado_texto }}</span>
+        </p>
+        
+        <p>
+            <strong>Fecha de Solicitud:</strong> 
+            {{ solicitud.fecha_solicitud|date:"d M Y (H:i)" }}
+        </p>
+        
+        <p>
+            <strong>Motivos enviados:</strong> 
+            {{ solicitud.motivos|default:"(No se especificaron motivos al enviar)" }}
+        </p>
+        
+        <hr>
+        
+        <p class="text-muted">Publicado por: {{ solicitud.animal.subido_por.username }}</p>
+        
+        <a href="{% url 'animales:detalle_animal' pk=solicitud.animal.pk %}" class="btn btn-sm btn-outline-secondary">
+            Ver Detalles del Animal
+        </a>
+        
+    </div>
+</div>

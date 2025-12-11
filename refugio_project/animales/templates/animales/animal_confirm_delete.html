@@ -13,8 +13,8 @@
     <form method="post">
         {% csrf_token %}
         <button type="submit" style="background-color: #dc3545; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px;">
-            Eliminar Permanentemente
+            Eliminar
         </button>
-        <a href="{% url 'animales:detalle' pk=animal.pk %}" style="margin-left: 15px; text-decoration: none; color: #007bff;">Cancelar</a>
+        <a href="{% url 'animales:detalle_animal' pk=animal.pk %}" style="margin-left: 15px; text-decoration: none; color: #007bff;">Cancelar</a>
     </form>
 {% endblock %}

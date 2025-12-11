@@ -1,8 +1,14 @@
 from django.contrib import admin
-from .models import Animal 
+from .models import Animal # importa el modelo Animal
 
-@admin.register(Animal) 
 class AnimalAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'raza', 'especie', 'disponible', 'fecha_ingreso')
-    list_filter = ('disponible', 'especie')
-    search_fields = ('nombre', 'raza')
+    list_display = (
+        'nombre', 
+        'especie', 
+        'disponible', 
+        'adoptado', 
+        'fecha_subida', 
+        'subido_por'
+    )
+
+admin.site.register(Animal, AnimalAdmin)

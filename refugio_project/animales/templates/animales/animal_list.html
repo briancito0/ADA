@@ -7,7 +7,10 @@
     
     {% if user.is_authenticated %}
         <p>
-            <a href="{% url 'animales:registrar' %}" style="padding: 5px 10px; background-color: green; color: white; border-radius: 5px; text-decoration: none;">Agregar Nuevo Animal</a>
+            {# CORRECCIÓN: Cambiado 'animales:crear' a 'animales:publicar_animal' #}
+            <a href="{% url 'animales:publicar_animal' %}" class="btn btn-success" style="text-decoration: none;">
+                Agregar Nuevo Animal
+            </a>
         </p>
     {% endif %}
 
@@ -23,7 +26,9 @@
                     {% endif %}
                     
                     <p>{{ animal.descripcion|truncatechars:100 }}</p>
-                    <a href="{% url 'animales:detalle' pk=animal.pk %}">Ver información de los animales</a>
+                    
+                    {# Nota: Esta URL también fue renombrada en urls.py a 'detalle_animal' #}
+                    <a href="{% url 'animales:detalle_animal' pk=animal.pk %}">Ver información de los animales</a>
                 </div>
             {% endfor %}
         </div>

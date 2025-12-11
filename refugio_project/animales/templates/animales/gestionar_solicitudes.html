@@ -1,0 +1,48 @@
+{% extends 'base.html' %} 
+
+{% block title %}Gestión de Solicitudes{% endblock %}
+
+{% block content %}
+    <h2>Gestión de Solicitudes de Adopción</h2>
+    <p>Revisa las solicitudes pendientes para los animales que has publicado.</p>
+
+    {% if solicitudes %}
+        <div class="list-group">
+            {% for solicitud in solicitudes %}
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-header bg-warning text-white">
+                        <h4 class="mb-0">Solicitud Pendiente para: {{ solicitud.animal.nombre }}</h4>
+                    </div>
+                    <div class="card-body">
+                        
+                        <p><strong>Adoptante:</strong> {{ solicitud.adoptante.username }}</p>
+                        <p><strong>Fecha de Solicitud:</strong> {{ solicitud.fecha_solicitud|date:"d M Y (H:i)" }}</p>
+
+                        <p><strong>Motivos de Adopción:</strong></p>
+                        <blockquote class="blockquote border-left pl-3" style="border-left: 5px solid #ccc; padding-left: 10px;">
+                            {{ solicitud.motivos|default:"(Motivos no especificados por el adoptante)" }}
+                        </blockquote>
+
+                        <hr>
+                        
+                        <form method="post" action="{% url 'animales:aceptar_solicitud' pk=solicitud.pk %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success">
+                                Aceptar Solicitud
+                            </button>
+                        </form>
+                        
+                        </div>
+                    <div class="card-footer text-muted">
+                        Publicado por ti ({{ solicitud.animal.subido_por.username }})
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            No hay solicitudes de adopción pendientes para responder.
+        </div>
+    {% endif %}
+
+{% endblock %}
